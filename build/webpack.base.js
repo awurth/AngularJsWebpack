@@ -12,7 +12,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['', '.js', '.css']
+    extensions: ['', '.js', '.css', '.html']
   },
   module: {
     preLoaders: [{
@@ -36,6 +36,9 @@ module.exports = {
           limit: 10000,
           name: '[name]-[hash:7].[ext]'
         }
+      }, {
+        test: /\.html$/,
+        loader: 'raw'
       }
     ]
   },
