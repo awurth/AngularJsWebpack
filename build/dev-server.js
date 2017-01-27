@@ -1,35 +1,47 @@
-let WebpackDevServer = require('webpack-dev-server')
 let webpack = require('webpack')
 let webpackConfig = require('./webpack.dev')
-let compiler = webpack(webpackConfig)
+let express = require('express')
 let config = require('./config')
-let chokidar = require('chokidar')
 let opn = require('opn')
 
 webpackConfig.entry.app.unshift('./build/dev-client.js')
+
+let app = express()
+let compiler = webpack(webpackConfig)
+
+let devMiddleware = require('webpack-dev-middleware')(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+  quiet: true
+})
 
 let hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: () => {}
 })
 
-let server = new WebpackDevServer(compiler, {
-  hot: true,
-  contentBase: './',
-  quiet: true,
-  noInfo: false,
-  publicPath: webpackConfig.output.publicPath,
-  stats: { colors: true }
+compiler.plugin('compilation', function (compilation) {
+  compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+    hotMiddleware.publish({ action: 'reload' })
+    cb()
+  })
 })
 
-server.use(hotMiddleware)
-server.listen(config.port, function (err) {
-  if (err)
-    console.log(err)
+// handle fallback for HTML5 history API
+app.use(require('connect-history-api-fallback')())
 
-  chokidar.watch(['index.html']).on('change', function (path) {
-    console.log('> ' + path + ' has changed. Reloading the page...')
-    hotMiddleware.publish({ action: 'reload' })
-  })
+// serve webpack bundle output
+app.use(devMiddleware)
+
+// enable hot-reload and state-preserving
+// compilation error display
+app.use(hotMiddleware)
+
+app.use(express.static('./'))
+
+app.listen(config.port, function (err) {
+  if (err) {
+    console.log(err)
+    return
+  }
 
   opn('http://localhost:' + config.port)
 })
