@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node build/build.js",
-    "dev": "node build/dev.js"
+    "dev": "node build/dev-server.js"
   },
   "dependencies": {
     "angular": "^1.6.1",
