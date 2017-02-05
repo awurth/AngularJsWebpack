@@ -8,10 +8,10 @@ import User from './user/user'
 import HomeController from './home/home.controller'
 
 export default angular.module('app', [resource, router])
-.constant('API', {
-  url: 'http://localhost:8080'
-})
-.factory('User', User)
-.service('AuthService', AuthService)
-.config(config)
-.controller('HomeCtrl', HomeController)
+  .constant('API', {
+    url: 'http://localhost:8080'
+  })
+  .factory('User', User)
+  .service('AuthService', AuthService)
+  .config(config)
+  .controller('HomeCtrl', HomeController)
