@@ -1,17 +1,17 @@
 
 export default class AuthService {
-  constructor ($window, User) {
-    this.$window = $window
+  constructor (JWTService, User) {
+    this.JWTService = JWTService
     this.User = User
   }
 
   check () {
-    return this.getToken() != null
+    return this.JWTService.getToken() != null
   }
 
   login (credentials) {
     return this.User.login(credentials, (user) => {
-      this.setToken(user.token)
+      this.JWTService.setToken(user.token)
     }).$promise
   }
 
@@ -21,32 +21,8 @@ export default class AuthService {
 
   logout () {
     // User.signout()
-    this.removeToken()
-  }
-
-  setToken (token) {
-    this.$window.localStorage.setItem('token_date', Date.now())
-    this.$window.localStorage.setItem('token', token)
-  }
-
-  getToken () {
-    let date = this.$window.localStorage.getItem('token_date')
-
-    // On teste la validité du token
-    // Si la dernière requête était il y a plus de 30 min (1800000 ms)
-    // on supprime le token, sinon on actualise la date
-    if (date && Date.now() - parseInt(date) > 1800000) {
-      this.$window.localStorage.removeItem('token')
-    } else {
-      this.$window.localStorage.setItem('token_date', Date.now())
-    }
-
-    return this.$window.localStorage.getItem('token')
-  }
-
-  removeToken () {
-    this.$window.localStorage.removeItem('token')
+    this.JWTService.removeToken()
   }
 }
 
-AuthService.$inject = ['$window', 'User']
+AuthService.$inject = ['JWTService', 'User']
