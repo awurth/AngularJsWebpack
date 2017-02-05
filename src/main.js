@@ -1,3 +1,5 @@
+import './assets/app.scss'
+
 import angular from 'angular'
 import resource from 'angular-resource'
 import router from 'angular-ui-router'
