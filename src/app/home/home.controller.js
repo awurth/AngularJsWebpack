@@ -1,5 +1,5 @@
 
-export default function HomeController ($scope) {
+export default class HomeController {
 }
 
-HomeController.$inject = ['$scope']
+HomeController.$inject = []

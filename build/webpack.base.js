@@ -12,7 +12,12 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['', '.js', '.css', '.html']
+    extensions: ['', '.js', '.css', '.html'],
+    alias: {
+      'src': path.resolve(__dirname, '../src'),
+      'assets': path.resolve(__dirname, '../src/assets'),
+      'app': path.resolve(__dirname, '../src/app')
+    }
   },
   module: {
     preLoaders: [{

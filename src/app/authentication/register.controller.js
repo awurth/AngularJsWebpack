@@ -1,14 +1,19 @@
 
-export default function RegisterController ($scope, AuthService) {
-  $scope.user = {}
+export default class RegisterController {
+  constructor ($state, AuthService) {
+    this.$state = $state
+    this.AuthService = AuthService
 
-  $scope.register = () => {
-    AuthService.register($scope.user).then((response) => {
-      // Redirect
-    }, (response) => {
+    this.user = {}
+  }
+
+  submit () {
+    this.AuthService.register(this.user).then(() => {
+      this.$state.go('login')
+    }, response => {
       console.log(response)
     })
   }
 }
 
-RegisterController.$inject = ['$scope', 'AuthService']
+RegisterController.$inject = ['$state', 'AuthService']
