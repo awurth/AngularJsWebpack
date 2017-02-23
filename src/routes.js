@@ -9,18 +9,18 @@ export default function route ($stateProvider) {
       url: '/',
       template: require('app/home/home.html'),
       controller: HomeController,
-      controllerAs: 'home'
+      controllerAs: 'Home'
     })
     .state('login', {
       url: '/login',
       template: require('app/authentication/login.html'),
       controller: LoginController,
-      controllerAs: 'login'
+      controllerAs: 'Login'
     })
     .state('register', {
       url: '/register',
       template: require('app/authentication/register.html'),
       controller: RegisterController,
-      controllerAs: 'register'
+      controllerAs: 'Register'
     })
 }
