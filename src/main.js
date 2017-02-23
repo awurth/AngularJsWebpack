@@ -27,3 +27,10 @@ export default angular.module('app', [resource, router])
   .directive('fieldError', FieldErrorDirective)
   .directive('fieldErrors', FieldErrorsDirective)
   .directive('uiDropdown', UIDropdownDirective)
+  .run(['$transitions', $transitions => {
+    $transitions.onSuccess({}, trans => {
+      if (trans.injector().get('JWTService').getAccessToken()) {
+        trans.injector().get('AuthService').check()
+      }
+    })
+  }])
