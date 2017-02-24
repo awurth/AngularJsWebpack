@@ -4,6 +4,8 @@ let webpackConfig = require('./webpack.base')
 let config = require('./config')
 let FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
+webpackConfig.entry.app.unshift('./build/dev-client.js')
+
 module.exports = merge(webpackConfig, {
   output: {
     publicPath: '/'
