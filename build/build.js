@@ -2,8 +2,9 @@ require('shelljs/global')
 let webpack = require('webpack')
 let conf = require('./webpack.prod')
 let ora = require('ora')
-let spinner = ora('building for production...')
+let chalk = require('chalk')
 
+let spinner = ora('building for production...')
 spinner.start()
 
 rm('-rf', 'dist')
@@ -23,5 +24,11 @@ webpack(conf, function (err, stats) {
     children: false,
     chunks: false,
     chunkModules: false
-  }) + '\n')
+  }) + '\n\n')
+
+  console.log(chalk.cyan('  Build complete.\n'))
+  console.log(chalk.yellow(
+    '  Tip: built files are meant to be served over an HTTP server.\n' +
+    '  Opening index.html over file:// won\'t work.\n'
+  ))
 })
