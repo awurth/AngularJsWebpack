@@ -8,7 +8,7 @@ spinner.start()
 
 rm('-rf', 'dist')
 mkdir('-p', 'dist/bower_components')
-cp('-r', 'bower_components/', 'dist/')
+cp('-r', 'bower_components/', '.htaccess', 'dist/')
 
 webpack(conf, function (err, stats) {
   spinner.stop()
