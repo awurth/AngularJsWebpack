@@ -4,7 +4,7 @@ import angular from 'angular'
 import resource from 'angular-resource'
 import router from 'angular-ui-router'
 
-import config from './config'
+import config from 'config'
 import JWTService from 'app/authentication/jwt.service'
 import AuthService from 'app/authentication/authentication.service'
 
