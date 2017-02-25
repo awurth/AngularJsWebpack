@@ -1,3 +1,5 @@
+import GuestMiddleware from 'app/middleware/guest.middleware'
+// import AuthMiddleware from 'app/middleware/auth.middleware'
 
 import HomeController from 'app/home/home.controller'
 import LoginController from 'app/authentication/login.controller'
@@ -15,12 +17,14 @@ export default function route ($stateProvider) {
       url: '/login',
       template: require('app/authentication/login.html'),
       controller: LoginController,
-      controllerAs: 'Login'
+      controllerAs: 'Login',
+      onEnter: GuestMiddleware
     })
     .state('register', {
       url: '/register',
       template: require('app/authentication/register.html'),
       controller: RegisterController,
-      controllerAs: 'Register'
+      controllerAs: 'Register',
+      onEnter: GuestMiddleware
     })
 }
