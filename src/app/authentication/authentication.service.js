@@ -13,7 +13,7 @@ export default class AuthService {
   }
 
   login (credentials) {
-    return this.User.login(credentials, (jwt) => {
+    return this.User.login(credentials, jwt => {
       this.JWTService.setAccessToken(jwt.access_token)
       this.JWTService.setRefreshToken(jwt.refresh_token)
     }).$promise
