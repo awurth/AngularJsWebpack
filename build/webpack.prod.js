@@ -1,6 +1,7 @@
 let webpack = require('webpack')
 let merge = require('webpack-merge')
 let webpackConfig = require('./webpack.base')
+let HtmlWebpackPlugin = require('html-webpack-plugin')
 let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 webpackConfig.module.rules[0] = {
@@ -27,6 +28,11 @@ module.exports = merge(webpackConfig, {
       },
       sourceMap: true,
       comments: false
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'electron.html',
+      template: 'electron.html',
+      inject: 'head'
     })
   ]
 })

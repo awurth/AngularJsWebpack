@@ -19,7 +19,7 @@ function createWindow () {
   mainWindow.maximize()
 
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '../dist/index.html'),
+    pathname: path.join(__dirname, '../dist/electron.html'),
     protocol: 'file:',
     slashes: true
   }))
