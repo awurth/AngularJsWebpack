@@ -1,5 +1,5 @@
 .idea/
 node_modules/
 dist/
-bower_components/
+static/vendor/
 npm-debug.log
