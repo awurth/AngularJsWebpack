@@ -2,7 +2,7 @@ import 'assets/scss/app.scss'
 
 import angular from 'angular'
 import resource from 'angular-resource'
-import router from 'angular-ui-router'
+import router from '@uirouter/angularjs'
 
 import config from 'config'
 import JWTService from 'app/authentication/jwt.service'
